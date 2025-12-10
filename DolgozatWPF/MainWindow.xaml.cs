@@ -49,5 +49,21 @@ namespace DolgozatWPF
             }
             dataGrid.ItemsSource = dolgozatok;
         }
+
+        private void hozzaadas(object sender, RoutedEventArgs e)
+        {
+            int eletkora;
+            int pontszama;
+            if (nevTextBox.Text.Length > 0 && int.TryParse(eletkorTextBox.Text, out eletkora) && eletkora > 6 && int.TryParse(pontszamTextBox.Text, out pontszama ) && pontszama >= 0 && pontszama <= 100) // jók
+            {
+                dolgozatok.Add(new Dolgozat(nevTextBox.Text, eletkora, pontszama));
+                dataGrid.ItemsSource = dolgozatok;
+                dataGrid.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Hiba!");
+            }
+        }
     }
 }
