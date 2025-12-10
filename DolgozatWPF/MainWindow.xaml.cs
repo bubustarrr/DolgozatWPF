@@ -65,5 +65,34 @@ namespace DolgozatWPF
                 MessageBox.Show("Hiba!");
             }
         }
+
+        private void mentes(object sender, RoutedEventArgs e)
+        {
+            if (dolgozatok == null)
+            {
+                MessageBox.Show("Nincsenek dolgozatok!");
+            }
+            string fajlba = "";
+            var path = "C:\\Users\\André Norbert\\source\\repos\\DolgozatWPF\\DolgozatWPF\\dolgozatok.txt";
+
+            foreach (var d in dolgozatok)
+            {
+                fajlba += $"{d.Nev};{d.Eletkor};{d.Pontszam}\n";
+            }
+            try
+            {
+                File.WriteAllText(path, fajlba);
+                MessageBox.Show("Sikeres mentés!", "Infó", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch(ArgumentException ae)
+            {
+                MessageBox.Show("Nem megfelelő argumentum", "Hiba",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(IOException ioe)
+            {
+                MessageBox.Show("Hibás fájlnév vagy elérési út", "Hiba",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            File.WriteAllText(path, fajlba);
+        }
     }
 }
